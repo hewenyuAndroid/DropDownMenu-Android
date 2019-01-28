@@ -271,7 +271,7 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
      * @param position
      */
     protected void updateDetail(final int position) {
-        if (mIsAnimatorExecute) {
+        if (mIsAnimatorExecute || mCurrentPosition == -1) {
             return;
         }
         // 获取原来打开的页面
@@ -298,7 +298,7 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
             public void onAnimationUpdate(ValueAnimator animation) {
                 float tempValue = (float) animation.getAnimatedValue();
                 // 更新容器的高度
-                updateDetailContainerHeight((int) (-tempValue));
+                updateDetailContainerHeight((int) (tempValue));
 
                 // 动态的设置详情页面的高度
                 ViewGroup.LayoutParams params = detailView.getLayoutParams();
@@ -329,7 +329,7 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
      * 关闭详情页面
      */
     public void closeDetail() {
-        if (mIsAnimatorExecute) {
+        if (mIsAnimatorExecute || mCurrentPosition == -1) {
             return;
         }
         // 显示当前的DetailView
