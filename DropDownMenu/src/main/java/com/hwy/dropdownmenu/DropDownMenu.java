@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
@@ -54,6 +55,9 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
      */
     protected List<Integer> mDetailHeights;
 
+    /**
+     * 当前选中的位置
+     */
     protected int mCurrentPosition = -1;
 
     /**
@@ -106,6 +110,15 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
 
     public DropDownMenu(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.DropDownMenu);
+        if (array.hasValue(R.styleable.DropDownMenu_maskViewColor)) {
+            mMaskColor = array.getColor(R.styleable.DropDownMenu_maskViewColor, mMaskColor);
+        }
+        if (array.hasValue(R.styleable.DropDownMenu_detailHeightMaxRatio)) {
+            mDetailHeightMaxRatio = array.getFloat(R.styleable.DropDownMenu_detailHeightMaxRatio, mDetailHeightMaxRatio);
+        }
+        array.recycle();
 
         mContext = context;
         mDetailHeights = new ArrayList<>();
@@ -188,7 +201,7 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
             if (mIsInitAdapter) {
                 view.setTranslationY(-mDetailHeights.get(i));
                 view.setVisibility(GONE);
-                if (i == count -1){
+                if (i == count - 1) {
                     mDetailWrapper.setVisibility(GONE);
                 }
             }

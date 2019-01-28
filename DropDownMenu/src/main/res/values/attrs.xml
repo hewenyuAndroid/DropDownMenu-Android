@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="DropDownMenu">
+        <!-- 遮罩层的颜色 -->
+        <attr name="maskViewColor" format="color" />
+        <!-- 内容详情允许的最大高度与内容容器高度的比例 -->
+        <attr name="detailHeightMaxRatio" format="float" />
+    </declare-styleable>
+
+</resources>
