@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/select_color"
+        android:clickable="true"
+        android:gravity="center"
+        android:inputType="text"
+        android:onClick="onBtnClick"
+        android:text="Activity页面的按钮" />
+
+    <com.hwy.dropdownmenu.DropDownMenu
+        android:id="@+id/drop_down_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>
