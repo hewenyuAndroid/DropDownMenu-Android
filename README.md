@@ -8,7 +8,7 @@ GIF图片看上去有点卡顿，可以[点击这里](https://github.com/hewenyu
 [Github地址](https://github.com/hewenyuAndroid/DropDownMenu-Android)
 
 ### 引入方式
-> compile 'com.hewenyu:DropDownMenu:1.0.1'
+> compile 'com.hewenyu:DropDownMenu:1.0.2'
 
 ### 思路分析
 1. 整个控件分为指示器和详情页面两个模块，可以采用LinearLayout为最外层布局;

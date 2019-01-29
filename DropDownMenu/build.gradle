@@ -47,8 +47,8 @@ def libName = "DropDownMenu"
 //compile引用时的第1部分
 group = "com.hewenyu"
 // 版本号，//compile引用时的最后部分项目名，下次更新是只需要更改版本号即可
-version = "1.0.1"
-//上面配置后上传至JCenter后的编译路径是这样的： compile 'com.hewenyu:DropDownMenu:1.0.1'
+version = "1.0.2"
+//上面配置后上传至JCenter后的编译路径是这样的： compile 'com.hewenyu:DropDownMenu:1.0.2'
 
 //生成源文件
 task sourcesJar(type: Jar) {
@@ -151,5 +151,5 @@ javadoc {
     }
 }
 
-//gradlew install
+// gradlew install
 // gradlew bintrayUpload

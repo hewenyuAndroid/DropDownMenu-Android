@@ -3,8 +3,10 @@ package com.hwy.dropdownmenu_android;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hwy.adapter.list.SimpleListAdapter;
 import com.hwy.adapter.list.ViewHolder;
@@ -88,6 +90,15 @@ public class DropMenuAdapter extends SimpleDropDownAdapter<String> {
                 holder.setText(R.id.tv_cate, data);
             }
         });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(mContext, mCateList.get(position), Toast.LENGTH_SHORT).show();
+                closeDetail();
+            }
+        });
+
         return listView;
     }
 

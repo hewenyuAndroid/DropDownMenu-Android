@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.hwy.dropdownmenu.adapter.BaseDropDownAdapter;
+import com.hwy.dropdownmenu.observer.DropDownObserver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +69,7 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
     /**
      * 默认动画的时长
      */
-    protected int mAnimatorDuration = 200;
+    protected long mAnimatorDuration = 200;
 
     /**
      * 打开详情页动画的插值器
@@ -209,6 +210,17 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
         mIsInitAdapter = false;
     }
 
+    // region -------------- 适配器相关 ---------------
+
+    private DropDownMenuObserver mDropDownMenuObserver;
+
+    private class DropDownMenuObserver extends DropDownObserver {
+        @Override
+        public void closeDetail() {
+            DropDownMenu.this.closeDetail();
+        }
+    }
+
     /**
      * 设置适配器
      *
@@ -217,6 +229,10 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
     public void setAdapter(BaseDropDownAdapter adapter) {
         if (adapter == null) {
             throw new RuntimeException("BaseIndicatorDetailAdapter is null object");
+        }
+
+        if (mAdapter != null && mDropDownMenuObserver != null) {
+            mAdapter.unregisterDataSetObserver(mDropDownMenuObserver);
         }
 
         mAdapter = adapter;
@@ -237,7 +253,12 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
             mDetailContainer.addView(detailView);
         }
 
+        // 注册观察者
+        mDropDownMenuObserver = new DropDownMenuObserver();
+        mAdapter.registerDataSetObserver(mDropDownMenuObserver);
     }
+
+    // endregion -------------------------------------
 
     /**
      * 设置菜单的点击事件
@@ -461,8 +482,12 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
 
     // region --------- get/set ---------
 
-    public void setAnimatorDuration(int duration) {
+    public void setAnimatorDuration(long duration) {
         this.mAnimatorDuration = duration;
+    }
+
+    public long getAnimatorDuration() {
+        return this.mAnimatorDuration;
     }
 
     public void setOpenInterpolator(Interpolator interpolator) {
